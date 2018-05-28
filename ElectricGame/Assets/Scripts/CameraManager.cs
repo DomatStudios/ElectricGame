@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
-	public int minZoom = 50;
-	public int maxZoom = 150;
+	[SerializeField]
+	int minZoom = 50;
+	[SerializeField]
+	int maxZoom = 150;
 
-	public bool inverseZoom = false;
+	[SerializeField]
+	bool inverseZoom = false;
 
-	public int panSpeed = 4;
+	[SerializeField]
+	int panSpeed = 4;
 
 	Vector3 lastFramePos;
 	Vector3 currFramePos;
@@ -28,7 +32,7 @@ public class CameraManager : MonoBehaviour {
 	}
 
 	void UpdateCameraPan(){
-		if(Input.GetMouseButton(2)){//middle mouse button
+		if(Input.GetAxis("Fire3") != 0){//middle mouse button
 			Vector3 diff = (lastFramePos - currFramePos) * panSpeed;;
 			cam.transform.Translate(new Vector3(diff.x, diff.y, 0.0f));
 		}
