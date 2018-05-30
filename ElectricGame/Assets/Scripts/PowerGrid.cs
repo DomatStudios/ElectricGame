@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerGrid : MonoBehaviour {
-    
+public class PowerGrid {
     public List<List<float>> powerGrid = new List<List<float>>();
     
-    public void MakePowerGrid (int buildingLength, int buildingHeight) {
-        for (int x = 0; x < buildingLength; x++)
-        {
+	public PowerGrid(int width, int height) {
+		for (int x = 0; x < width; x++) {
             List<float> powerValues = new List<float>();
-            for (int y = 0; y < buildingHeight; y++)
-            {
+            for (int y = 0; y < height; y++) {
                 powerValues.Add(100);
             }
             powerGrid.Add(powerValues);

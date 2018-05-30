@@ -22,6 +22,7 @@ public class CameraManager : MonoBehaviour {
 	void Start(){
 		cam = Camera.main;
 		lastFramePos = cam.ScreenToViewportPoint(Input.mousePosition);
+		new Building(5, 5);
 	}
 
 	void Update(){
