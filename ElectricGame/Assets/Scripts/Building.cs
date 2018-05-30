@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Building {
 	Dictionary<string, Room> roomProtos = new Dictionary<string, Room>();
-	List<List<Room>> rooms = new List<List<Room>>();
+	public List<List<Room>> rooms = new List<List<Room>>();
 
 	PowerGrid powerGrid;
 

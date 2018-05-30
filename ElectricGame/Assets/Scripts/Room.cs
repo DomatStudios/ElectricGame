@@ -4,7 +4,7 @@ using System.Collections;
 public enum RoomType {Empty=0, CheapApartment, AverageApartment, ExpensiveApartment, Penthouse, Corridor, Restroom, Elevator, Stairwell, Foyer, Reception}
 
 public class Room {
-	RoomType type;
+	public RoomType type {get; protected set;}
 	public int width {get; protected set;}
 	public int height {get; protected set;}
 	public int price {get; protected set;}

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Day_Night_Cycle : MonoBehaviour {
+public class DayNightCycle : MonoBehaviour {
    public delegate void timeZone();
    public static timeZone newDay;
 
@@ -13,8 +13,11 @@ public class Day_Night_Cycle : MonoBehaviour {
     private float noRepeatTimer = 1f;
     private bool doNotRepeat = false;
 
+	[SerializeField]
+	MoneyManager moneyManager;
+
 	void Start () {
-	     newDay += DayEnded;
+		newDay += moneyManager.AddIncome;
 	}
 
 	void FixedUpdate() {
@@ -32,8 +35,4 @@ public class Day_Night_Cycle : MonoBehaviour {
             doNotRepeat = false;
         }
     }
-
-	void DayEnded() {
-		//what happens when day ends
-	}
 }
