@@ -5,9 +5,12 @@ public class Building {
 	Dictionary<string, Room> roomProtos = new Dictionary<string, Room>();
 	public List<List<Room>> rooms = new List<List<Room>>();
 
+	MoneyManager moneyManager;
+
 	PowerGrid powerGrid;
 
-	public Building(int width, int height) {
+	public Building(MoneyManager moneyManager, int width, int height) {
+		this.moneyManager = moneyManager;
 		LoadRoomProtos();
 		powerGrid = new PowerGrid(width, height);
 		for (int x = 0; x < width; x++) {
@@ -16,6 +19,14 @@ public class Building {
 				roomValues.Add(Room.BuildRoom(roomProtos["Empty"]));
 			}
 			rooms.Add(roomValues);
+		}
+	}
+
+	public void MoveIn(Entity entity, int x, int y) {
+		for(int i = 0; i < rooms[x][y].width; i++){
+			for(int j = 0; j < rooms[x][y].height; j++){
+				rooms[i][j].SetEntity(entity);
+			}
 		}
 	}
 
@@ -40,7 +51,7 @@ public class Building {
 		for(int i = 0; i < newRoom.width; i++){
 			for(int j = 0; j < newRoom.height; j++){
 				rooms[i][j] = newRoom;
-				//TODO: Subtract newRoom.price from money
+				moneyManager.AddMoney(-newRoom.price);
 			}
 		}
 	}

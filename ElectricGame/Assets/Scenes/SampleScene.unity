@@ -172,6 +172,7 @@ MonoBehaviour:
   ageMax: 80
   buildingWidth: 25
   buildingHeight: 25
+  moneyManager: {fileID: 20644072}
 --- !u!114 &20644072
 MonoBehaviour:
   m_ObjectHideFlags: 0

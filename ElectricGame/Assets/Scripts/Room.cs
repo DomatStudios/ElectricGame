@@ -9,6 +9,8 @@ public class Room {
 	public int height {get; protected set;}
 	public int price {get; protected set;}
 
+	Entity entity;
+
 	public Room(RoomType type, int width, int height, int price) {
 		this.width = width;
 		this.height = height;
@@ -18,6 +20,14 @@ public class Room {
 
 	public static Room BuildRoom(Room proto) {
 		return new Room(proto.type, proto.width, proto.height, proto.price);
+	}
+		
+	public void SetEntity(Entity entity){
+		this.entity = entity;
+	}
+
+	public bool IsEmpty() {
+		return (entity == null);
 	}
 }
 

@@ -17,19 +17,23 @@ public class WorldManager : MonoBehaviour {
 	[SerializeField]
 	int buildingHeight = 25;
 
+	[SerializeField]
+	MoneyManager moneyManager;
+
 	public List<Entity> population = new List<Entity>();
     List<string> namesList;
 
     int currentCitizen = 0;
 
 	void Start() {
-		building = new Building(buildingWidth, buildingHeight);
+		building = new Building(moneyManager, buildingWidth, buildingHeight);
 		GenerateCitizenName();
 		int x = 0;
 		int y = 0;
 		for (int i = 0; i < numCitizens; i++) {
 			if(building.rooms[x][y].type == RoomType.CheapApartment || building.rooms[x][y].type == RoomType.AverageApartment || building.rooms[x][y].type == RoomType.ExpensiveApartment || building.rooms[x][y].type == RoomType.Penthouse){
 				population.Add(new Citizen(namesList[Random.Range(0, namesList.Count-1)], x, y, Random.Range(ageMin, ageMax), (CitizenJob) Random.Range(0, System.Enum.GetValues(typeof(CitizenJob)).Length)));
+				building.MoveIn(population[population.Count-1], x, y);
 			}
 			x += building.rooms[x][y].width;
 			if(x > buildingWidth){

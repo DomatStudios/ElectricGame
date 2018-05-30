@@ -27,4 +27,8 @@ public class MoneyManager : MonoBehaviour {
 			moneyText.text = "Money: " + money.ToString();
 		}
 	}
+
+	public void AddMoney(int amt){
+		money += amt;
+	}
 }
