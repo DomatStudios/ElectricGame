@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class Day_Night_Cycle : MonoBehaviour {
 
-   delegate void myDelegate();
-    myDelegate my;
+   public delegate void timeZone();
+   public static timeZone newDay;
 
-    public float cycleSpeed = 5f;
-
-
+    [SerializeField]
+    private float cycleSpeed = 5f;
+    [SerializeField]
+    GameObject sun;
+    private float noRepeatTimer = 1f;
+    private bool doNotRepeat = false;
 	// Use this for initialization
 	void Start () {
 
-        my += CycleInfo;
+        newDay += Test;
       
 	}
 	
     void Update() {
-        my();
 
     }
 
 	// Update is called once per frame
 	void FixedUpdate () {
-        transform.RotateAround(Vector3.zero, Vector3.right, cycleSpeed * Time.deltaTime);
-        transform.LookAt(Vector3.zero);
+        sun.transform.RotateAround(Vector3.zero, Vector3.right, cycleSpeed * Time.deltaTime);
+        sun.transform.LookAt(Vector3.zero);
+        if (sun.transform.position.y > 0f && sun.transform.position.y < cycleSpeed && sun.transform.localRotation.y == 0 && !doNotRepeat)
+        {
+            newDay();
+            doNotRepeat = true;
+        }
+        if(doNotRepeat)
+        {
+            noRepeatTimer -= Time.deltaTime;
+        }
+        if(noRepeatTimer < 0)
+        {
+            noRepeatTimer = 1f;
+            doNotRepeat = false;
+        }
     }
 
-    void CycleInfo()
+    void Test()
     {
-        
-        if (GameObject.FindGameObjectWithTag("Sun").transform.position.y < 0f)
-        {
-            Debug.Log("it's night!");
-        }
-      
+        Debug.Log("g");
     }
+    
 }
