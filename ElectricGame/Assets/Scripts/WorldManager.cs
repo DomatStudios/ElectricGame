@@ -13,9 +13,11 @@ public class WorldManager : MonoBehaviour {
     
 	public Building building {get; protected set;}
 	[SerializeField]
-	int buildingWidth = 25;
+	int buildingWidth;
 	[SerializeField]
-	int buildingHeight = 25;
+	int buildingHeight;
+    [SerializeField]
+    private GenerateBuilding generateBuilding;
 
 	[SerializeField]
 	MoneyManager moneyManager;
@@ -26,25 +28,23 @@ public class WorldManager : MonoBehaviour {
     int currentCitizen = 0;
 
 	void Start() {
-		building = new Building(moneyManager, buildingWidth, buildingHeight);
+
+        generateBuilding.CreateBuilding(buildingWidth, buildingHeight);
+        building = new Building(moneyManager, buildingWidth, buildingHeight);
 		GenerateCitizenName();
-		int x = 0;
-		int y = 0;
-		for (int i = 0; i < numCitizens; i++) {
-			if(building.rooms[x][y].type == RoomType.CheapApartment || building.rooms[x][y].type == RoomType.AverageApartment || building.rooms[x][y].type == RoomType.ExpensiveApartment || building.rooms[x][y].type == RoomType.Penthouse){
-				population.Add(new Citizen(namesList[Random.Range(0, namesList.Count-1)], x, y, Random.Range(ageMin, ageMax), (CitizenJob) Random.Range(0, System.Enum.GetValues(typeof(CitizenJob)).Length)));
-				building.MoveIn(population[population.Count-1], x, y);
-			}
-			x += building.rooms[x][y].width;
-			if(x > buildingWidth){
-				y++;
-				x = 0;
-			}
-			if(y > buildingHeight){
-				break;
-			}
-       	}
-	}
+        for (int x = 0; x < buildingWidth; x++)
+        {
+            for (int y = 0; y < buildingHeight; y++)
+            {
+                if (building.rooms[x][y].type != RoomType.Empty)
+                {
+                    population.Add(new Citizen(namesList[Random.Range(0, namesList.Count - 1)], x, y, Random.Range(ageMin, ageMax), (CitizenJob)Random.Range(0, System.Enum.GetValues(typeof(CitizenJob)).Length)));
+                    building.MoveIn(population[population.Count - 1], x, y);
+                }
+            }
+        }
+    }
+
 
 	void GenerateCitizenName() {
 		string names = File.ReadAllText(Application.streamingAssetsPath + "/names.txt");

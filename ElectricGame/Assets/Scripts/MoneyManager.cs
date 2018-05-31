@@ -9,7 +9,7 @@ public class MoneyManager : MonoBehaviour {
 	
 	//taxRate is percentage out of 100
 	[SerializeField]
-	float taxRate = 10;
+	int taxRate = 10;
 
 	[SerializeField]
 	Text moneyText;
@@ -25,7 +25,7 @@ public class MoneyManager : MonoBehaviour {
 
 	public void AddIncome() {
 		for(int i = 0; i < worldManager.GetNumCitizens(); i++) {
-			money += 5 * taxRate * (int)worldManager.building.rooms[worldManager.population[i].x][worldManager.population[i].y].type;
+			money += 50 + taxRate * (worldManager.building.rooms[worldManager.population[i].x][worldManager.population[i].y].price);
 		}
 		if(moneyText != null){
 			moneyText.text = "Money: " + money.ToString();

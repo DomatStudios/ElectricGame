@@ -36,7 +36,15 @@ public class CameraManager : MonoBehaviour {
 			Vector3 diff = (lastFramePos - currFramePos) * panSpeed;;
 			cam.transform.Translate(new Vector3(diff.x, diff.y, 0.0f));
 		}
-	}
+        if(Input.GetAxis("Horizontal") != 0)
+        {
+            cam.transform.Translate(new Vector3(Time.deltaTime * panSpeed * Input.GetAxisRaw("Horizontal"), 0 ));
+        }
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            cam.transform.Translate(new Vector3(0, Time.deltaTime * panSpeed * Input.GetAxisRaw("Vertical")));
+        }
+    }
 
 	void UpdateCameraZoom(){
 		if(inverseZoom){
@@ -44,6 +52,15 @@ public class CameraManager : MonoBehaviour {
 		} else{
 			cam.fieldOfView -= Input.GetAxis("Mouse ScrollWheel") * cam.fieldOfView / 2;
 		}
-		cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minZoom, maxZoom);
+        if(Input.GetKey(KeyCode.Q))
+        {
+            cam.fieldOfView += Time.deltaTime * cam.fieldOfView/2;
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            cam.fieldOfView -= Time.deltaTime * cam.fieldOfView / 2;
+        }
+        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minZoom, maxZoom);
 	}
 }

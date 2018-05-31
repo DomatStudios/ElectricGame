@@ -16,7 +16,7 @@ public class Building {
 		for (int x = 0; x < width; x++) {
 			List<Room> roomValues = new List<Room>();
 			for (int y = 0; y < height; y++) {
-				roomValues.Add(Room.BuildRoom(roomProtos["Empty"]));
+				roomValues.Add(Room.BuildRoom(roomProtos["CheapApartment"]));
 			}
 			rooms.Add(roomValues);
 		}
