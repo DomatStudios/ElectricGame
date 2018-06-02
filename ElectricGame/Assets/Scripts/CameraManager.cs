@@ -74,7 +74,7 @@ public class CameraManager : MonoBehaviour {
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
-            cam.transform.Rotate(Vector3.up * 45); ;
+            cam.transform.Rotate(Vector3.up * 45); 
         }
 
        
