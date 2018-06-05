@@ -28,6 +28,7 @@ public class CameraManager : MonoBehaviour {
 		currFramePos = cam.ScreenToViewportPoint(Input.mousePosition);
 		UpdateCameraPan();
 		UpdateCameraZoom();
+        UpdateCameraRotation();
 		lastFramePos = cam.ScreenToViewportPoint(Input.mousePosition);
 	}
 
@@ -63,4 +64,22 @@ public class CameraManager : MonoBehaviour {
         }
         cam.fieldOfView = Mathf.Clamp(cam.fieldOfView, minZoom, maxZoom);
 	}
+
+    void UpdateCameraRotation() {
+
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            cam.transform.Rotate(Vector3.up * -45);
+        }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            cam.transform.Rotate(Vector3.up * 45); 
+        }
+
+       
+    }
+    
+
+
 }
