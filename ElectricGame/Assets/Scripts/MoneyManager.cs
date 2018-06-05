@@ -25,7 +25,7 @@ public class MoneyManager : MonoBehaviour {
 
 	public void AddIncome() {
 		for(int i = 0; i < worldManager.GetNumCitizens(); i++) {
-			money += 50 + taxRate * (worldManager.building.rooms[worldManager.population[i].x][worldManager.population[i].y].price);
+			money += 50 + taxRate * (worldManager.building.rooms[worldManager.population[i].aptX][worldManager.population[i].aptY].price);
 		}
 		if(moneyText != null){
 			moneyText.text = "Money: " + money.ToString();

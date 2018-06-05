@@ -12,6 +12,16 @@ public class Household : Entity {
 		this.members = members;
 	}
 
+	public override bool Update() {
+		bool happy = true;
+		foreach(Entity entity in members) {
+			if(!entity.Update()) {
+				happy = false;
+			}
+		}
+		return happy;
+	}
+
 	public void AddFamily(Entity member) {
 		members.Add(member);
 	}
