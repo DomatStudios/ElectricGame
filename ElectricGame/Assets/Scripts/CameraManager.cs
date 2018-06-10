@@ -14,6 +14,14 @@ public class CameraManager : MonoBehaviour {
 	[SerializeField]
 	int panSpeed = 4;
 
+    
+    [SerializeField]
+    [Tooltip("Press X to rotate the cam")]
+    GameObject building;
+
+    [SerializeField]
+    float camRotSpeed;
+
 	Vector3 lastFramePos;
 	Vector3 currFramePos;
 
@@ -77,6 +85,10 @@ public class CameraManager : MonoBehaviour {
             cam.transform.Rotate(Vector3.up * 45); 
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            cam.transform.RotateAround(building.transform.position, Vector3.up, camRotSpeed * Time.deltaTime);
+        }
        
     }
     
