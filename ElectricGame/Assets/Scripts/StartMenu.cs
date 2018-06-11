@@ -67,7 +67,14 @@ public class StartMenu : MonoBehaviour {
 
     // ---------------Options-------------//
 
+<<<<<<< HEAD
     public void ShowOptionsPanel(bool isShowing) {
+=======
+
+
+    public void ShowOptionsPanel(bool isShowing)
+    {
+>>>>>>> 274bd8546bee1e001605e2d79b5cb29dbc05b232
         optionsPanel.SetActive(isShowing);
     }
 
