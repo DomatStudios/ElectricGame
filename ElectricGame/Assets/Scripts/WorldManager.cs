@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class WorldManager : MonoBehaviour {
     [SerializeField]
-    int numCitizens = 20;
-
-    [SerializeField]
     int ageMin = 18;
     [SerializeField]
     int ageMax = 80;
@@ -23,6 +20,8 @@ public class WorldManager : MonoBehaviour {
 	[SerializeField]
 	MoneyManager moneyManager;
 	[SerializeField]
+	BuildModeManager buildModeManager;
+	[SerializeField]
 	DayNightCycle dayNightCycle;
 
 	public List<Entity> population = new List<Entity>();
@@ -33,7 +32,7 @@ public class WorldManager : MonoBehaviour {
 	[SerializeField]
 	GameObject citizen;
 
-	void Start() {
+	void OnEnable() {
         building = new Building(moneyManager, buildingWidth, buildingHeight);
 		CreateBuilding(buildingWidth, buildingHeight);
 		GenerateCitizenName();
@@ -78,8 +77,11 @@ public class WorldManager : MonoBehaviour {
 	void CreateBuilding(int width, int height) {
 		for (int x = 0; x < width; x++) {
 			for(int y = 0; y < height; y++) {
-				GameObject newRoom = Instantiate(building.rooms[x][y].prefab);
-				newRoom.transform.position = new Vector3(x * newRoom.transform.GetChild(0).lossyScale.y * 2, y * newRoom.transform.GetChild(0).lossyScale.z * 2, 0);
+				if(building.rooms[x][y].prefab != null) {
+					GameObject newRoom = Instantiate(building.rooms[x][y].prefab);
+					newRoom.transform.position = new Vector3(x * newRoom.transform.GetChild(0).lossyScale.y * 2, y * newRoom.transform.GetChild(0).lossyScale.z * 2, 0);
+					newRoom.transform.parent = buildModeManager.parent;
+				}
 			}
 		}
 	}

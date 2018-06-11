@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 
 public class Building {
-	Dictionary<string, Room> roomProtos = new Dictionary<string, Room>();
+	public Dictionary<string, Room> roomProtos = new Dictionary<string, Room>();
 	public List<List<Room>> rooms = new List<List<Room>>();
-
-	//0 = residential, 1 = elevator or stairs, 2 = foyer
-	List<List<int>> roomMap = new List<List<int>>();
 
 	MoneyManager moneyManager;
 
@@ -23,21 +20,14 @@ public class Building {
 		powerGrid = new PowerGrid(width, height);
 		for (int x = 0; x < width; x++) {
 			List<Room> roomValues = new List<Room>();
-			List<int> roomMapValues = new List<int>();
 			for (int y = 0; y < height; y++) {
 				if(x == 0 && y == 0) {
 					roomValues.Add(Room.BuildRoom(roomProtos["Foyer"], x, y, this));
-					roomMapValues.Add(2);
-				} else if(x == 1) {
-					roomValues.Add(Room.BuildRoom(roomProtos["Elevator"], x, y, this));
-					roomMapValues.Add(1);
 				} else {
-					roomValues.Add(Room.BuildRoom(roomProtos["CheapApartment"], x, y, this));
-					roomMapValues.Add(0);
+					roomValues.Add(Room.BuildRoom(roomProtos["Empty"], x, y, this));
 				}
 			}
 			rooms.Add(roomValues);
-			roomMap.Add(roomMapValues);
 		}
 	}
 
@@ -53,15 +43,15 @@ public class Building {
 		//TODO: probably need to load these from an XML file
 		roomProtos.Add("Empty", new Room(RoomType.Empty, 1, 1, 0, null));
 		roomProtos.Add("CheapApartment", new Room(RoomType.CheapApartment, 1, 1, 150, Resources.Load("CheapApartment") as GameObject));
-		roomProtos.Add("AverageApartment", new Room(RoomType.AverageApartment, 2, 1, 300, null));
-		roomProtos.Add("ExpensiveApartment", new Room(RoomType.ExpensiveApartment, 3, 1, 500, null));
-		roomProtos.Add("Penthouse", new Room(RoomType.Penthouse, 2, 2, 1000, null));
-		roomProtos.Add("Corridor", new Room(RoomType.Corridor, 2, 1, 100, null));
-		roomProtos.Add("Restroom", new Room(RoomType.Restroom, 1, 1, 500, null));
+		roomProtos.Add("AverageApartment", new Room(RoomType.AverageApartment, 2, 1, 300, Resources.Load("AverageApartment") as GameObject));
+		roomProtos.Add("ExpensiveApartment", new Room(RoomType.ExpensiveApartment, 3, 1, 500, Resources.Load("ExpensiveApartment") as GameObject));
+		roomProtos.Add("Penthouse", new Room(RoomType.Penthouse, 2, 2, 1000, Resources.Load("Penthouse") as GameObject));
+		roomProtos.Add("Corridor", new Room(RoomType.Corridor, 2, 1, 100, Resources.Load("Corridor") as GameObject));
+		roomProtos.Add("Restroom", new Room(RoomType.Restroom, 1, 1, 500, Resources.Load("Restroom") as GameObject));
 		roomProtos.Add("Elevator", new Room(RoomType.Elevator, 1, 1, 500, Resources.Load("Elevator") as GameObject));
-		roomProtos.Add("Stairwell", new Room(RoomType.Stairwell, 1, 1, 250, null));
+		roomProtos.Add("Stairwell", new Room(RoomType.Stairwell, 1, 1, 250, Resources.Load("Stairwell") as GameObject));
 		roomProtos.Add("Foyer", new Room(RoomType.Foyer, 1, 1, 100, Resources.Load("Foyer") as GameObject));
-		roomProtos.Add("Reception", new Room(RoomType.Reception, 2, 1, 500, null));
+		roomProtos.Add("Reception", new Room(RoomType.Reception, 2, 1, 500, Resources.Load("Reception") as GameObject));
 	}
 
 	public void BuildRoom(int x, int y, RoomType type) {

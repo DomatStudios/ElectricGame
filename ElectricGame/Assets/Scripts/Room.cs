@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public enum RoomType {Empty=0, CheapApartment, AverageApartment, ExpensiveApartment, Penthouse, Corridor, Restroom, Elevator, Stairwell, Foyer, Reception}
 

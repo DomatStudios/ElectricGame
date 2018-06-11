@@ -34,5 +34,8 @@ public class MoneyManager : MonoBehaviour {
 
 	public void AddMoney(int amt){
 		money += amt;
+		if(moneyText != null){
+			moneyText.text = "Money: " + money.ToString();
+		}
 	}
 }
